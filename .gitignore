@@ -1,5 +1,5 @@
-launch.json
+.vscode/
 
-diary/__pycache__
-diary/migrations
-python_Django/__pycache__
+__pycache__/
+
+.DS_Store
