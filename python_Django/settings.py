@@ -70,14 +70,20 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "python_Django.wsgi.application"
 
+# os
+import os
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "private_diary",
+        "USER": os.environ.get("DB_USER"),
+        "PASSWORD": os.environ.get("DB_PASSWORD"),
+        "HOST": "",
+        "PORT": "",
     }
 }
 
@@ -122,3 +128,37 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# log
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    # log setting
+    "loggers": {"django": {"handlers": ["console"], "level": "INFO"}},
+    # app log
+    "diary": {
+        "handlers": ["console"],
+        "level": "DEBUG",
+    },
+    # hanlder setting
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "dev",
+        }
+    },
+    # format setting
+    "formatters": {
+        "dev": {
+            "format": "\t".join(
+                [
+                    "%(asctime)s",
+                    "[%(levelname)s]",
+                    "%(pathname)s(Line:%(lineno)d)",
+                    "%(message)s",
+                ]
+            )
+        }
+    },
+}
