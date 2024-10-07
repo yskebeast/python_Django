@@ -4,6 +4,11 @@ body,
   flex-direction: column;
   min-height: 100vh;
 }
+
 footer {
   margin-top: auto;
+}
+
+.my-div-style {
+  margin-top: 6rem;
 }
